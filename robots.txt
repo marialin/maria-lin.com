@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /slides/
+
+Sitemap: https://maria-lin.com/sitemap.xml
