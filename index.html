@@ -54,7 +54,35 @@ nav a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visibl
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .lang button{border:0;background:none;color:var(--muted);padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--jade);color:var(--surface)}
-@media (max-width:760px){nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap}nav a{white-space:nowrap}}
+/* mobile */
+@media (max-width:600px){
+  body{font-size:15.5px}
+  section.view{padding-block:24px 48px}
+  .bar{gap:10px;padding-block:8px}
+  .seal{width:34px;height:34px;font-size:14px}
+  .brand b{font-size:15px}
+  .brand small{font-size:11px}
+  nav{margin-inline:-4px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  nav::-webkit-scrollbar{display:none}
+  nav a{font-size:14px;padding:6px 9px}
+  .hero{gap:24px;padding-block:8px 0}
+  .hero p.lead{font-size:16px}
+  .ctas .btn{flex:1 1 100%;text-align:center}
+  .band,.scroll{padding:20px}
+  .rule{grid-template-columns:48px 1fr;gap:12px}
+  .rule .num{font-size:32px}
+  .lockrule{grid-template-columns:1fr}
+  .facts b{font-size:20px}
+  th,td{padding:8px 10px;font-size:14px}
+  .contactline code{font-size:15px;word-break:break-all}
+  .verdict{grid-template-columns:1fr;gap:4px}
+  .verdict p{margin-bottom:10px}
+}
+/* keep the language switch on the right at every width */
+.bar{flex-wrap:nowrap}
+.brand,.lang{flex-shrink:0}
+nav{flex:0 1 auto;min-width:0;justify-content:flex-end}
+@media (max-width:760px){.bar{flex-wrap:wrap}nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}nav a{white-space:nowrap}}
 
 /* sections */
 section.view{padding-block:40px 64px}
@@ -453,12 +481,12 @@ footer .wrap{display:grid;gap:10px}
     <label class="consent" for="p-consent"><input id="p-consent" type="checkbox" required>
       <span><span class="zh">我同意 Maria Lin 收集和使用以上资料，仅用于为我提供房产及财务规划咨询（依据《个人资料保护法》PDPA）。</span><span class="en">I consent to Maria Lin collecting and using this information only to advise me on property and financial planning, under Singapore's PDPA.</span></span></label>
 
-    <button class="btn primary" type="submit"><span class="zh">生成问卷并发送给 Maria</span><span class="en">Prepare my answers for Maria</span></button>
+    <button class="btn primary" type="submit"><span class="zh">通过 WhatsApp 发送给 Maria</span><span class="en">Send to Maria via WhatsApp</span></button>
     <p class="note" id="p-err" hidden></p>
 
     <div id="p-done" class="card" hidden>
-      <h3><span class="zh">问卷已准备好</span><span class="en">Your answers are ready</span></h3>
-      <p><span class="zh">资料不会储存在本网站。请复制下面的内容，通过 WhatsApp（+65 8912 8000）发给 Maria。Maria 确认面谈时间后，会把 R4–R7 发给你。</span><span class="en">Nothing is stored on this website. Copy the text below and send it to Maria on WhatsApp (+65 8912 8000). Once she confirms your meeting, she'll send you R4–R7.</span></p>
+      <h3><span class="zh">已为你打开 WhatsApp</span><span class="en">WhatsApp is open</span></h3>
+      <p><span class="zh">请在 WhatsApp 中按「发送」。如果 WhatsApp 没有打开，请复制下面的内容发给 Maria（+65 8912 8000）。资料不会储存在本网站。Maria 确认面谈时间后，会把 R4–R7 发给你。</span><span class="en">Tap Send in WhatsApp. If WhatsApp didn't open, copy the text below and send it to Maria (+65 8912 8000). Nothing is stored on this website. Once she confirms your meeting, she'll send you R4–R7.</span></p>
       <textarea id="p-msg" readonly></textarea>
       <div class="ctas" style="margin-top:4px">
         <button class="btn primary" type="button" id="p-copy"><span class="zh">复制内容</span><span class="en">Copy text</span></button>
@@ -579,6 +607,11 @@ footer .wrap{display:grid;gap:10px}
     navigator.clipboard&&navigator.clipboard.writeText(t).then(function(){b.textContent="✓"},function(){});
   })});
 
+  function openWA(text){
+    var url="https://wa.me/6589128000?text="+encodeURIComponent(text);
+    var w=null; try{w=window.open(url,"_blank","noopener")}catch(e){}
+    if(!w) location.href=url;
+  }
   function v(id){var el=document.getElementById(id);return el?el.value.trim():""}
   function or(x){return x||"—"}
   document.getElementById("p").addEventListener("submit",function(e){
@@ -618,7 +651,8 @@ footer .wrap{display:grid;gap:10px}
       "我同意依据 PDPA 使用以上资料作规划咨询。"
     ];
     document.getElementById("p-msg").value=L.join("\n");
-    var d=document.getElementById("p-done");d.hidden=false;d.scrollIntoView({behavior:"smooth",block:"start"});
+    document.getElementById("p-done").hidden=false;
+    openWA(L.join("\n"));
   });
   document.getElementById("p-copy").addEventListener("click",function(){
     var t=document.getElementById("p-msg"), ok=document.getElementById("p-copied");
@@ -664,9 +698,8 @@ footer .wrap{display:grid;gap:10px}
     var out=document.getElementById("f-out");
     if(!n){out.hidden=false;out.textContent=document.body.dataset.l==="zh"?"请填写姓名。":"Please enter your name.";return}
     var msg="Hi Maria, I'm "+n+" ("+document.getElementById("f-status").value+"). I'm interested in: "+document.getElementById("f-topic").value+". "+document.getElementById("f-phone").value+" "+document.getElementById("f-msg").value;
-    var url="https://wa.me/6589128000?text="+encodeURIComponent(msg.trim());
-    out.hidden=false;
-    out.innerHTML=(document.body.dataset.l==="zh"?"已准备好消息。":"Your message is ready. ")+' <a href="'+url+'" target="_blank" rel="noopener">'+(document.body.dataset.l==="zh"?"打开 WhatsApp 发送":"Open WhatsApp to send")+'</a>';
+    out.hidden=true;
+    openWA(msg.trim());
   });
 })();
 </script>
