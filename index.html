@@ -255,6 +255,21 @@ pre.r47{white-space:pre-wrap;word-break:break-word;font-family:var(--f-body);fon
 .faq summary{cursor:pointer;font-weight:700;list-style-position:outside}
 .faq details p{margin-top:8px;color:var(--muted)}
 .flinks a{color:var(--muted)}
+.landgap{margin-top:32px;display:grid;gap:14px;border:2px solid var(--seal);border-radius:12px;padding:22px;background:var(--surface)}
+.lg-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch}
+.lg-compare>div{min-width:0}
+.lg-compare>div:not(.lg-vs):not(.lg-diff){background:var(--jade-soft);border-radius:10px;padding:14px;display:grid;gap:2px}
+.lg-label{font-size:13px;color:var(--muted)}
+.lg-num{font-family:var(--f-display);font-size:clamp(26px,4vw,36px);color:var(--jade);font-variant-numeric:tabular-nums;line-height:1.2}
+.lg-num.hot{color:var(--seal)}
+.lg-unit{font-size:12px;color:var(--muted)}
+.lg-vs{align-self:center;font-family:var(--f-latin);font-size:24px;color:var(--muted)}
+.lg-diff{grid-column:1/-1;display:flex;gap:10px;align-items:baseline;justify-content:center;background:var(--seal);color:var(--surface);border-radius:10px;padding:10px 14px;font-weight:700}
+.lg-diff b{font-family:var(--f-display);font-size:28px}
+.lg-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.lg-urge{font-weight:700;color:var(--seal)}
+.lg-cta{display:grid;gap:10px;justify-items:start;border-top:1px solid var(--line);padding-top:14px}
+@media (max-width:600px){.lg-compare{grid-template-columns:1fr}.lg-vs{justify-self:center;font-size:18px}.lg-cta .btn{width:100%;text-align:center}.landgap{padding:16px}}
 footer{border-top:1px solid var(--line);background:var(--surface);padding-block:28px;font-size:13px;color:var(--muted)}
 footer .wrap{display:grid;gap:10px}
 @media (prefers-reduced-motion:no-preference){section.view{animation:rise .35s ease both}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
@@ -501,6 +516,31 @@ footer .wrap{display:grid;gap:10px}
     <div><b>~5 ha</b><span><span class="zh">占地，约 88% 为绿化与水景</span><span class="en">site, ~88% greenery &amp; water</span></span></div>
   </div>
 
+  <section class="landgap" aria-labelledby="lg-h">
+    <p class="eyebrow">🚨 <span class="zh">土地成本差距</span><span class="en">Land cost gap</span></p>
+    <h2 id="lg-h"><span class="zh">每平方英尺土地成本相差 S$434！这个差距值得您关注</span><span class="en">A S$434 psf ppr difference. Let that sink in.</span></h2>
+    <div class="lg-compare">
+      <div><span class="lg-label">Thomson Reserve <span class="zh">土地成本</span><span class="en">land cost</span></span><b class="lg-num">S$1,178</b><span class="lg-unit">psf ppr</span></div>
+      <div class="lg-vs">vs</div>
+      <div><span class="lg-label"><span class="zh">最新 Lorong Puntong 政府售地（GLS）投标价</span><span class="en">Latest Lorong Puntong GLS bid</span></span><b class="lg-num hot">S$1,612</b><span class="lg-unit">psf ppr</span></div>
+      <div class="lg-diff"><span class="zh">相差</span><span class="en">Difference</span><b>S$434</b></div>
+    </div>
+    <p class="note">📰 <span class="zh">新闻参考：</span><span class="en">Source: </span><a href="https://www.businesstimes.com.sg/property/malaysian-developer-eco-world-tops-bids-sin-ming-area-housing-plot-s1612-psf-ppr-bid" target="_blank" rel="noopener"><span class="zh">《The Business Times》— Eco World 以 S$1,612 psf ppr 投标价竞得 Sin Ming 一带住宅地段</span><span class="en">The Business Times: Malaysian developer Eco World tops bids for Sin Ming-area housing plot with S$1,612 psf ppr bid</span></a></p>
+    <p><span class="zh">这正是为什么 Thomson Reserve 的入场价格值得您进一步了解。</span><span class="en">This is exactly why Thomson Reserve's entry price deserves a closer look.</span></p>
+    <ul class="lg-list">
+      <li>🌿 <span class="zh">知名开发商打造的优质项目</span><span class="en">A quality project by renowned developers</span></li>
+      <li>🚇 <span class="zh">毗邻 Upper Thomson 地铁站</span><span class="en">Next to Upper Thomson MRT</span></li>
+      <li>🏠 <span class="zh">大型住宅项目，共 1,268 个单位</span><span class="en">Mega development: 1,268 residential units</span></li>
+      <li>💰 <span class="zh">较低的土地成本基础</span><span class="en">Lower underlying land cost</span></li>
+      <li>📈 <span class="zh">未来具备潜在价值提升空间</span><span class="en">Potential room for future value</span></li>
+    </ul>
+    <p class="note"><span class="zh">Stacked Homes 估计，Sin Ming 这幅地段的新盘可能以每平方英尺 $3,000–$3,100 开盘（</span><span class="en">Stacked Homes estimates new homes on the Sin Ming site could launch at $3,000–$3,100 psf (</span><a href="https://stackedhomes.com/zh/a-malaysian-developer-just-put-in-a-record-bid-for-this-sin-ming-gls-site-new-homes-could-launch-at-3000-3100-psf/" target="_blank" rel="noopener"><span class="zh">文章</span><span class="en">article</span></a>)<span class="zh">；Thomson Reserve 指示起价为 $2,608 psf。</span><span class="en">; Thomson Reserve's indicative prices start from $2,608 psf.</span></p>
+    <p class="lg-urge">‼️ <span class="zh">把握机会，别轻易错过！这样的入场机会未必会再次出现。</span><span class="en">Don't wait to seize this opportunity. It might never come back again.</span></p>
+    <div class="lg-cta">
+      <p><span class="zh">想知道土地成本的差距可能如何影响您所选单位的价格吗？私讯我「1178」，我会为您详细分析！</span><span class="en">Want to see how this land-cost difference could translate into your unit price? Send me "1178" and I'll break it down for you.</span></p>
+      <a class="btn primary" href="https://wa.me/6589128000?text=1178" target="_blank" rel="noopener"><span class="zh">WhatsApp 发送「1178」</span><span class="en">WhatsApp me "1178"</span></a>
+    </div>
+  </section>
   <h2 style="margin-top:36px"><span class="zh">官方指示起价</span><span class="en">Indicative starting prices</span></h2>
   <p class="note" style="margin-block:6px 12px"><span class="zh">发展商 2026 年 10 月公布，以最低价单位计算。完整价目表于开盘日公布，可能调整。</span><span class="en">Developer figures, October 2026, for the lowest-priced stacks. The full price list is released on launch day and may change.</span></p>
   <div class="tbl"><table>
@@ -515,7 +555,7 @@ footer .wrap{display:grid;gap:10px}
   <h2 style="margin-top:36px"><span class="zh">用 7R 准则看汤申御苑</span><span class="en">Thomson Reserve through the 7R lens</span></h2>
   <div class="card" style="margin-top:16px">
     <div class="verdict">
-      <span class="chip watch">R1</span><p><span class="zh"><b>价格差：</b>地价约每平方尺 $1,178（容积率）。据 Stacked Homes 估算，起价比 Thomson Three 高约 21%，比 JadeScape 高约 11%。入场价不低，选单位要更挑。</span><span class="en"><b>Margin gap:</b> land cost was about $1,178 psf ppr. Stacked Homes puts launch pricing about 21% above Thomson Three and 11% above JadeScape. Entry isn't cheap, so unit choice matters more.</span></p>
+      <span class="chip ok">R1</span><p><span class="zh"><b>价格差：</b>要跟<b>将来</b>的楼盘比，不是只跟旧楼盘比。汤申御苑的地价约每平方尺 S$1,178（容积率），附近 Lorong Puntong（Sin Ming）政府售地最新投标价是 S$1,612，<b>相差 S$434</b>（<a href="https://www.businesstimes.com.sg/property/malaysian-developer-eco-world-tops-bids-sin-ming-area-housing-plot-s1612-psf-ppr-bid" target="_blank" rel="noopener">新闻</a>）。地价越高，将来新盘的开盘价就越高。旧楼盘的价格也要还原后再比较：一是按剩余地契折算（剩余年数 ÷ 99 年）；二是旧算法把冷气机台（aircon ledge）等无用空间也算进面积，换成新算法后面积变小，每平方尺价格其实更高。另外，新房产有开发商的缺陷保修（defect liability），旧房产则有翻新和维护费；要把旧单位的室内装修做到新盘的水平，也是一笔不小的开销。这样比较，汤申御苑现在的价格差是有利的。</span><span class="en"><b>Margin gap:</b> compare against <b>future</b> launches, not just older condos. Thomson Reserve's land cost was about S$1,178 psf ppr; the latest nearby Lorong Puntong (Sin Ming) GLS bid is S$1,612, <b>a S$434 difference</b> (<a href="https://www.businesstimes.com.sg/property/malaysian-developer-eco-world-tops-bids-sin-ming-area-housing-plot-s1612-psf-ppr-bid" target="_blank" rel="noopener">news</a>). Higher land prices mean higher launch prices for future projects. Older condos must also be adjusted before comparing: first for lease decay (remaining years ÷ 99), and second for area, since the old method counted unusable space such as aircon ledges. Under the new method the area shrinks, so their real psf is higher. New homes also come with the developer's defect warranty, while older homes carry renovation and upkeep costs, and bringing an older unit's interior up to new-launch standard is a significant expense. On that basis, Thomson Reserve's margin gap today is favourable.</span></p>
       <span class="chip ok">R2</span><p><span class="zh"><b>区域转型：</b>汤申东海岸线已通车，附近 Bright Hill 站将成为跨岛线换乘站。</span><span class="en"><b>Transformation:</b> the Thomson-East Coast Line is running, and nearby Bright Hill will become an interchange with the Cross Island Line.</span></p>
       <span class="chip ok">R3</span><p><span class="zh"><b>规模：</b>1,268 个单位的大盘，未来成交活跃，管理费分摊人数多。</span><span class="en"><b>Size:</b> a 1,268-unit mega project, so frequent future transactions and widely shared costs.</span></p>
       <span class="chip lock">R4–R7</span><p><span class="zh">完整的 R4–R7 分析会在面谈时提供。<a href="#plan">先填写规划问卷</a></span><span class="en">The full R4–R7 analysis is shared at our meeting. <a href="#plan">Start with the planning form</a></span></p>
@@ -668,7 +708,6 @@ footer .wrap{display:grid;gap:10px}
           <input id="t-pass" type="password" inputmode="numeric" autocomplete="off">
           <button class="btn primary" type="submit" id="t-btn"><span class="zh">解锁</span><span class="en">Unlock</span></button>
         </div>
-        <p class="note hintline"><span class="zh">提示：</span><span class="en">Hint: </span><span class="hint">_R_A__Agentsteam___Achievements</span></p>
         <p class="note err" id="t-err" hidden></p>
       </form>
     </div>
