@@ -209,7 +209,9 @@ input[type=checkbox].invalid{outline:2px solid var(--seal);outline-offset:2px}
 .lockbox{max-width:520px}
 .pw{display:flex;gap:10px;flex-wrap:wrap}
 .pw input{flex:1 1 200px;font-variant-numeric:tabular-nums;letter-spacing:.1em}
-.hint{font-family:ui-monospace,Menlo,monospace;background:var(--jade-soft);color:var(--jade);padding:2px 8px;border-radius:6px;word-break:break-all}
+.hint{font-family:ui-monospace,Menlo,monospace;word-break:break-all}
+.hintline{font-size:11px;color:var(--muted);opacity:.12;transition:opacity .3s}
+.hintline:hover{opacity:.45}
 .err{color:var(--seal)}
 .tlinks{display:grid;gap:14px;max-width:720px}
 .tlinks a.card{text-decoration:none;color:var(--ink)}
@@ -666,7 +668,7 @@ footer .wrap{display:grid;gap:10px}
           <input id="t-pass" type="password" inputmode="numeric" autocomplete="off">
           <button class="btn primary" type="submit" id="t-btn"><span class="zh">解锁</span><span class="en">Unlock</span></button>
         </div>
-        <p class="note"><span class="zh">提示：</span><span class="en">Hint: </span><span class="hint">_R_A__Agentsteam___Achievements</span></p>
+        <p class="note hintline"><span class="zh">提示：</span><span class="en">Hint: </span><span class="hint">_R_A__Agentsteam___Achievements</span></p>
         <p class="note err" id="t-err" hidden></p>
       </form>
     </div>
