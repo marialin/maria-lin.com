@@ -271,6 +271,8 @@ pre.r47{white-space:pre-wrap;word-break:break-word;font-family:var(--f-body);fon
 .lg-urge{font-weight:700;color:var(--seal)}
 .lg-cta{display:grid;gap:10px;justify-items:start;border-top:1px solid var(--line);padding-top:14px}
 @media (max-width:600px){.lg-compare{grid-template-columns:1fr}.lg-vs{justify-self:center;font-size:18px}.lg-cta .btn{width:100%;text-align:center}.landgap{padding:16px}}
+.caution{margin-top:12px;border-left:3px solid var(--seal);background:color-mix(in srgb,var(--seal) 6%,var(--surface));border-radius:0 8px 8px 0;padding:12px 16px;display:grid;gap:6px}
+.caution ol{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--ink)}
 footer{border-top:1px solid var(--line);background:var(--surface);padding-block:28px;font-size:13px;color:var(--muted)}
 footer .wrap{display:grid;gap:10px}
 @media (prefers-reduced-motion:no-preference){section.view{animation:rise .35s ease both}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
@@ -371,8 +373,18 @@ footer .wrap{display:grid;gap:10px}
   </div>
   <div style="margin-top:28px">
     <div class="rule"><div class="num">R1</div><div><h3><span class="zh">价格差</span><span class="en-sub">Margin Gap</span></h3>
-      <p><span class="zh">每平方尺价格是贵还是便宜，要和周边比较，不能只听朋友或新闻。</span><span class="en">Whether a psf price is high or low only makes sense against its neighbours, not hearsay or headlines.</span></p>
-      <ul><li><span class="zh">附近二手公寓成交价</span><span class="en">Nearby resale condo transactions</span></li><li><span class="zh">附近新盘价格</span><span class="en">Nearby new launch prices</span></li><li><span class="zh">即将招标的地段与地价</span><span class="en">Upcoming land sales and land rates</span></li><li><span class="zh">同区域其他项目</span><span class="en">Other projects in the same region</span></li></ul></div></div>
+      <p><span class="zh">每平方尺价格是贵还是便宜，要和周边比较，不能只听朋友或新闻。最重要的是跟<b>将来</b>的楼盘比，而不是只跟旧楼盘比。</span><span class="en">Whether a psf price is high or low only makes sense against the right comparisons, not hearsay or headlines. Above all, compare against <b>future</b> launches, not just older condos.</span></p>
+      <ul><li><span class="zh">即将招标的地段与最新地价：地价越高，将来新盘的开盘价越高</span><span class="en">Upcoming land sales and the latest land rates: higher land costs mean higher future launch prices</span></li><li><span class="zh">附近新盘价格</span><span class="en">Nearby new launch prices</span></li><li><span class="zh">附近二手公寓成交价（先还原，见下方）</span><span class="en">Nearby resale condo transactions (adjusted first, see below)</span></li><li><span class="zh">同区域其他项目</span><span class="en">Other projects in the same region</span></li></ul>
+      <div class="caution">
+        <p><b><span class="zh">⚠️ 不要直接拿旧楼盘的每平方尺价格比较</span><span class="en">⚠️ Don't compare an older condo's psf at face value</span></b></p>
+        <p><span class="zh">如果只看表面价格，剩余地契越短的旧楼盘看起来越便宜、越"划算"，这是完全错误的。比较之前要先还原：</span><span class="en">At face value, the older the lease, the cheaper and better-value a condo looks. That's completely wrong. Adjust first:</span></p>
+        <ol>
+          <li><span class="zh"><b>剩余地契：</b>按剩余年数折算（剩余年数 ÷ 99 年）。剩下 60 年的公寓，不能和全新 99 年地契的新盘按同一个价比较。</span><span class="en"><b>Remaining lease:</b> scale by remaining years ÷ 99. A condo with 60 years left can't be priced against a fresh 99-year launch on the same basis.</span></li>
+          <li><span class="zh"><b>面积算法：</b>旧算法把冷气机台（aircon ledge）等无用空间也算进面积。换成新算法后面积变小，每平方尺价格其实更高。</span><span class="en"><b>Area method:</b> the old method counted unusable space such as aircon ledges. Under the new method the area shrinks, so the real psf is higher.</span></li>
+          <li><span class="zh"><b>翻新与维护：</b>新房产有开发商的缺陷保修（defect liability），旧房产则有翻新和维护费。要把旧单位的室内装修做到新盘的水平，也是一笔不小的开销。</span><span class="en"><b>Renovation and upkeep:</b> new homes come with the developer's defect warranty, while older homes carry renovation and upkeep costs. Bringing an older unit's interior up to new-launch standard is a significant expense.</span></li>
+        </ol>
+        <p class="note"><span class="zh">例子：</span><span class="en">Example: </span><a href="/thomson-reserve/"><span class="zh">汤申御苑的地价比最新 Lorong Puntong 政府售地低 S$434 每平方尺</span><span class="en">Thomson Reserve's land cost is S$434 psf ppr below the latest Lorong Puntong GLS bid</span></a></p>
+      </div></div></div>
     <div class="rule"><div class="num">R2</div><div><h3><span class="zh">区域转型</span><span class="en-sub">Transformation</span></h3>
       <p><span class="zh">读懂市建局总蓝图（Master Plan），提前看到哪些区域会有新地铁线、商业中心或绿地，争取先行者优势。</span><span class="en">Reading the URA Master Plan shows where new rail lines, business hubs and parks are coming, so you can move early.</span></p></div></div>
     <div class="rule"><div class="num">R3</div><div><h3><span class="zh">项目规模与土地面积</span><span class="en-sub">Development &amp; Land Size</span></h3>
@@ -951,8 +963,10 @@ footer .wrap{display:grid;gap:10px}
   var cache={};
   function slide(n){
     if(cache[n])return cache[n];
-    var url=(location.protocol==="file:"?"":"/")+DATA.deck.prefix+(n<10?"0":"")+n+".bin";
-    cache[n]=fetch(url).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()}).then(function(buf){
+    var file=DATA.deck.prefix+(n<10?"0":"")+n+".bin", root=location.protocol==="file:"?"":"/";
+    function get(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()})}
+    // slides may live at /slides/ or inside the "maria-lin.com upload" folder on GitHub
+    cache[n]=get(root+file).catch(function(){return get(root+"maria-lin.com%20upload/"+file)}).then(function(buf){
       var all=new Uint8Array(buf);
       return crypto.subtle.decrypt({name:"AES-GCM",iv:all.slice(0,12)},TKEY,all.slice(12));
     }).then(function(pt){return URL.createObjectURL(new Blob([pt],{type:"image/jpeg"}))});
