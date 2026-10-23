@@ -174,6 +174,24 @@ legend{font-family:var(--f-display);font-weight:700;padding:0 6px}
 .tlinks a.card{text-decoration:none;color:var(--ink)}
 .tlinks a.card:hover{border-color:var(--jade)}
 .tlinks .url{font-size:13px;color:var(--jade);word-break:break-all}
+.deckcard{font:inherit;text-align:left;cursor:pointer;width:100%;color:var(--ink)}
+.deckcard img{width:100%;height:auto;aspect-ratio:16/9;border-radius:6px;background:var(--jade-soft);border:1px solid var(--line);object-fit:cover}
+.deckcard .btn{justify-self:start}
+.tlinks h2{font-size:20px;margin-top:10px}
+pre.r47{white-space:pre-wrap;word-break:break-word;font-family:var(--f-body);font-size:14px;margin:0;color:var(--ink);max-height:280px;overflow:auto}
+.deck{position:fixed;inset:0;z-index:50;background:#0b0f0e;color:#fff;display:flex;flex-direction:column;
+  padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.deck[hidden]{display:none!important}
+.deck-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;font-size:14px;color:#c9d3cf;font-variant-numeric:tabular-nums}
+.deck-tools{display:flex;gap:6px}
+.deck-tools button,.deck-nav{background:rgba(255,255,255,.1);color:#fff;border:0;border-radius:8px;font-size:18px;width:40px;height:40px;cursor:pointer}
+.deck-stage{flex:1;min-height:0;display:grid;place-items:center;padding:0 8px 8px;cursor:pointer;user-select:none;-webkit-user-select:none}
+.deck-stage img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.deck-status{color:#f2b8b5}
+.deck-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:64px;font-size:34px;opacity:.7}
+.deck-nav:hover{opacity:1}
+.deck-nav.prev{left:calc(8px + env(safe-area-inset-left,0px))}.deck-nav.next{right:calc(8px + env(safe-area-inset-right,0px))}
+@media (max-width:600px){.deck-nav{display:none}}
 footer{border-top:1px solid var(--line);background:var(--surface);padding-block:28px;font-size:13px;color:var(--muted)}
 footer .wrap{display:grid;gap:10px}
 @media (prefers-reduced-motion:no-preference){section.view{animation:rise .35s ease both}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
@@ -570,6 +588,18 @@ footer .wrap{display:grid;gap:10px}
     </form>
   </div>
 </section>
+<div id="deck" class="deck" hidden role="dialog" aria-label="7R Plus Framework 2026">
+  <div class="deck-bar">
+    <span id="deck-n" class="deck-n">1 / 51</span>
+    <span class="deck-tools">
+      <button type="button" id="deck-fs" aria-label="Full screen">⛶</button>
+      <button type="button" id="deck-close" aria-label="Close">✕</button>
+    </span>
+  </div>
+  <div id="deck-stage" class="deck-stage"><img id="deck-img" alt=""><p id="deck-status" class="deck-status" hidden></p></div>
+  <button type="button" id="deck-prev" class="deck-nav prev" aria-label="Previous slide">‹</button>
+  <button type="button" id="deck-next" class="deck-nav next" aria-label="Next slide">›</button>
+</div>
 </main>
 
 <footer>
@@ -660,19 +690,86 @@ footer .wrap{display:grid;gap:10px}
     if(navigator.clipboard){navigator.clipboard.writeText(t.value).then(function(){ok.hidden=false},fallback)}else fallback();
   });
 
-  var TEAM={"s":"ALy3od7et2Zd3sX3dLxp0g==","i":"30b0RUzGZLmD9LzY","d":"rfZw1dNTlvr+1nL8R6gOmK0TqRMfo+u+tF/k8HKGAQf32hvomAd3XqZLCcBk3zm2gPeNvzqFzhtDcUGuKa5WSmZizMAG8ZugNJD2uQrSRpHOGnvFq6Jckf8dN9B+VWhmDXn4TyWMWSkkm+28HecNIffvSonJVIOINYJJDRg1qUzM5bG43dpjeg1aKfy0FOgQatnspS+33UcVfdEJluGM36uLgFWRoC+iWvuLUPegkmOCfgXkWgLg4lZK0wQjYVKCXrX7xl5bEUqBTkiP6PVeCNs4aIykxYItQDXiumhvtI7UQBqdGD0BHDPPDCR7Okol4T8EtDzne87E51O/bg8EHJAyz6VuHgXvSoL3DGDtVavQMayoWlADlxMrGgZkG/RnfV8r0j9MXOcddT1ao523IEPg5Rg1E9VCWvGN94ix+94RODBFAsOD4fOp/76/HusW9Sj0NUYFT0BNqFtDIDzeQgK+/lKz1vIfckOruIgo8ZERpFpqX39FAIQkZdpeDCuBLoJB6NbbpXbvSmgpTfPFrg8389moM0iWQZblY9Vd8jHrSomhbL7Q8TEzCOaAUmKzIEfecCE3753S5zJ8bYvchyYYjWNOuRG01vwg/f6rUxqq2hJSbdMbZl+DS96mPzx7tBMY36TvHkNEs1glHq8y27D2dHeQ7hcpEdW9J/KRD3b5tLWek3R6InIGaO1JTPJZ4/S1jwJVqz4QDfn3aPLySk9jdEUznfKanB1LEQu3xQeoJ0ZquVnUWP7otU63nuNXHoX4lFn/jlCVC7MVHaeIW9Yy/QdpNZJ0GW/FbeyEUVCngu3FeLUn/2dFlER0ECzZvHfwuut8da2hrE6MhoBxreaBGQcXJxliSHJUZsJv40HWb3RP"};
+  var TEAM={"s":"ALy3od7et2Zd3sX3dLxp0g==","i":"2cWohS2sqTqkvcPG","d":"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"}, TKEY=null, DATA=null;
   function b64(x){return Uint8Array.from(atob(x),function(c){return c.charCodeAt(0)})}
   function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
-  function showTeam(items){
-    var box=document.getElementById("t-links");
-    box.innerHTML=items.map(function(it){
+  function L(zh,en){return '<span class="zh">'+zh+'</span><span class="en">'+en+'</span>'}
+  function showTeam(d){
+    DATA=d;
+    var h='<h2>'+L("演示资料","Presentation")+'</h2>';
+    h+='<button type="button" class="card deckcard" id="t-open">'+
+       '<img id="t-thumb" alt="" width="1600" height="900">'+
+       '<h3>'+L(esc(d.deck.zh),esc(d.deck.en))+'</h3><p>'+L(esc(d.deck.zhn),esc(d.deck.enn))+'</p>'+
+       '<span class="btn primary">'+L("开始展示","Start presenting")+'</span></button>';
+    h+='<h2>'+L("R4–R7 客户信息","R4–R7 client message")+'</h2>';
+    h+='<div class="card"><pre class="r47" id="t-r47">'+esc(d.r47)+'</pre>'+
+       '<div class="ctas" style="margin-top:4px"><button type="button" class="btn primary" id="t-r47copy">'+L("复制信息","Copy message")+'</button>'+
+       '<a class="btn ghost" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(d.r47)+'">'+L("用 WhatsApp 发送","Send with WhatsApp")+'</a></div>'+
+       '<p class="note" id="t-r47ok" hidden>'+L("已复制。","Copied.")+'</p></div>';
+    h+='<h2>'+L("团队链接","Team links")+'</h2>';
+    h+=d.links.map(function(it){
       return '<a class="card" href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">'+
-        '<h3><span class="zh">'+esc(it.zh)+'</span><span class="en">'+esc(it.en)+'</span></h3>'+
-        '<p><span class="zh">'+esc(it.zhn)+'</span><span class="en">'+esc(it.enn)+'</span></p>'+
-        '<span class="url">'+esc(it.url)+'</span></a>';
+        '<h3>'+L(esc(it.zh),esc(it.en))+'</h3><p>'+L(esc(it.zhn),esc(it.enn))+'</p><span class="url">'+esc(it.url)+'</span></a>';
     }).join("");
-    box.hidden=false;document.getElementById("t-lock").hidden=true;
+    var box=document.getElementById("t-links");box.innerHTML=h;box.hidden=false;
+    document.getElementById("t-lock").hidden=true;
+    document.getElementById("t-open").addEventListener("click",function(){openDeck(1)});
+    document.getElementById("t-r47copy").addEventListener("click",function(){
+      var ok=document.getElementById("t-r47ok");
+      function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById("t-r47"));var s=getSelection();s.removeAllRanges();s.addRange(r);ok.hidden=false}
+      if(navigator.clipboard){navigator.clipboard.writeText(d.r47).then(function(){ok.hidden=false},sel)}else sel();
+    });
+    slide(1).then(function(u){document.getElementById("t-thumb").src=u}).catch(function(){});
   }
+  // slides: fetched, decrypted, cached as object URLs
+  var cache={};
+  function slide(n){
+    if(cache[n])return cache[n];
+    var url=DATA.deck.prefix+(n<10?"0":"")+n+".bin";
+    cache[n]=fetch(url).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()}).then(function(buf){
+      var all=new Uint8Array(buf);
+      return crypto.subtle.decrypt({name:"AES-GCM",iv:all.slice(0,12)},TKEY,all.slice(12));
+    }).then(function(pt){return URL.createObjectURL(new Blob([pt],{type:"image/jpeg"}))});
+    cache[n].catch(function(){delete cache[n]});
+    return cache[n];
+  }
+  var cur=1, V=document.getElementById("deck");
+  function render(){
+    var img=document.getElementById("deck-img"),st=document.getElementById("deck-status");
+    document.getElementById("deck-n").textContent=cur+" / "+DATA.deck.count;
+    var want=cur; st.hidden=true;
+    slide(cur).then(function(u){if(want===cur){img.src=u;img.alt="Slide "+cur}}).catch(function(){
+      if(want===cur){st.hidden=false;st.textContent=document.body.dataset.l==="zh"?"无法载入这一页，请检查网络。":"Couldn't load this slide. Check your connection."}
+    });
+    [cur+1,cur+2,cur-1].forEach(function(k){if(k>=1&&k<=DATA.deck.count)slide(k).catch(function(){})});
+  }
+  function go(n){cur=Math.max(1,Math.min(DATA.deck.count,n));render()}
+  function openDeck(n){V.hidden=false;document.body.style.overflow="hidden";go(n)}
+  function closeDeck(){V.hidden=true;document.body.style.overflow="";if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){})}
+  document.getElementById("deck-prev").addEventListener("click",function(){go(cur-1)});
+  document.getElementById("deck-next").addEventListener("click",function(){go(cur+1)});
+  document.getElementById("deck-close").addEventListener("click",closeDeck);
+  document.getElementById("deck-fs").addEventListener("click",function(){
+    if(document.fullscreenElement){document.exitFullscreen().catch(function(){})}
+    else if(V.requestFullscreen){V.requestFullscreen().catch(function(){})}
+    else if(V.webkitRequestFullscreen){V.webkitRequestFullscreen()}
+  });
+  document.getElementById("deck-stage").addEventListener("click",function(e){
+    var r=e.currentTarget.getBoundingClientRect(); go(e.clientX-r.left<r.width/3?cur-1:cur+1);
+  });
+  document.addEventListener("keydown",function(e){
+    if(V.hidden)return;
+    if(e.key==="ArrowRight"||e.key===" "||e.key==="PageDown"){e.preventDefault();go(cur+1)}
+    else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(cur-1)}
+    else if(e.key==="Escape"&&!document.fullscreenElement)closeDeck();
+    else if(e.key==="Home")go(1);else if(e.key==="End")go(DATA.deck.count);
+  });
+  var sx=null,sy=0;
+  V.addEventListener("touchstart",function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  V.addEventListener("touchend",function(e){
+    if(sx===null)return;var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=null;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){go(dx<0?cur+1:cur-1)}
+  });
   document.getElementById("t-form").addEventListener("submit",function(e){
     e.preventDefault();
     var zh=document.body.dataset.l==="zh",err=document.getElementById("t-err"),btn=document.getElementById("t-btn");
@@ -684,11 +781,11 @@ footer .wrap{display:grid;gap:10px}
     crypto.subtle.importKey("raw",te.encode(pass),"PBKDF2",false,["deriveKey"]).then(function(k){
       return crypto.subtle.deriveKey({name:"PBKDF2",salt:b64(TEAM.s),iterations:600000,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["decrypt"]);
     }).then(function(key){
-      return crypto.subtle.decrypt({name:"AES-GCM",iv:b64(TEAM.i)},key,b64(TEAM.d));
+      TKEY=key;return crypto.subtle.decrypt({name:"AES-GCM",iv:b64(TEAM.i)},key,b64(TEAM.d));
     }).then(function(buf){
       err.hidden=true;showTeam(JSON.parse(new TextDecoder().decode(buf)));
     }).catch(function(){
-      err.textContent=zh?"密码不正确，请再试一次。":"That passcode isn't right. Try again.";
+      TKEY=null;err.textContent=zh?"密码不正确，请再试一次。":"That passcode isn't right. Try again.";
     }).then(function(){btn.disabled=false});
   });
 
