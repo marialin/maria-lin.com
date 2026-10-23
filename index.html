@@ -137,6 +137,15 @@ legend{font-family:var(--f-display);font-weight:700;padding:0 6px}
 .consent{display:flex;gap:10px;align-items:flex-start;font-weight:400}
 .consent input{width:auto;margin-top:6px}
 #p-msg{font-family:var(--f-body);font-size:14px;min-height:220px}
+.lockbox{max-width:520px}
+.pw{display:flex;gap:10px;flex-wrap:wrap}
+.pw input{flex:1 1 200px;font-variant-numeric:tabular-nums;letter-spacing:.1em}
+.hint{font-family:ui-monospace,Menlo,monospace;background:var(--jade-soft);color:var(--jade);padding:2px 8px;border-radius:6px;word-break:break-all}
+.err{color:var(--seal)}
+.tlinks{display:grid;gap:14px;max-width:720px}
+.tlinks a.card{text-decoration:none;color:var(--ink)}
+.tlinks a.card:hover{border-color:var(--jade)}
+.tlinks .url{font-size:13px;color:var(--jade);word-break:break-all}
 footer{border-top:1px solid var(--line);background:var(--surface);padding-block:28px;font-size:13px;color:var(--muted)}
 footer .wrap{display:grid;gap:10px}
 @media (prefers-reduced-motion:no-preference){section.view{animation:rise .35s ease both}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
@@ -159,6 +168,7 @@ footer .wrap{display:grid;gap:10px}
       <a href="#thomson"><span class="zh">汤申御苑</span><span class="en">Thomson Reserve</span></a>
       <a href="#plan"><span class="zh">免费规划</span><span class="en">Free Plan</span></a>
       <a href="#about"><span class="zh">关于我</span><span class="en">About</span></a>
+      <a href="#team"><span class="zh">团队专区</span><span class="en">Team</span></a>
       <a href="#contact"><span class="zh">联系</span><span class="en">Contact</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Language">
@@ -459,6 +469,26 @@ footer .wrap{display:grid;gap:10px}
   </form>
 </section>
 
+<!-- TEAM (encrypted) -->
+<section class="view" id="v-team" data-view="team" hidden>
+  <div class="stack lockbox">
+    <p class="eyebrow"><span class="zh">仅限团队成员</span><span class="en">Team members only</span></p>
+    <h1><span class="zh">团队专区</span><span class="en">Team Area</span></h1>
+    <div id="t-lock" class="card">
+      <form id="t-form" class="stack" style="gap:12px" novalidate>
+        <label for="t-pass"><span class="zh">请输入团队密码</span><span class="en">Enter the team passcode</span></label>
+        <div class="pw">
+          <input id="t-pass" type="password" inputmode="numeric" autocomplete="off">
+          <button class="btn primary" type="submit" id="t-btn"><span class="zh">解锁</span><span class="en">Unlock</span></button>
+        </div>
+        <p class="note"><span class="zh">提示：</span><span class="en">Hint: </span><span class="hint">_R_A__Agentsteam___Achievements</span></p>
+        <p class="note err" id="t-err" hidden></p>
+      </form>
+    </div>
+    <div id="t-links" class="tlinks" hidden></div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="view" id="v-about" data-view="about" hidden>
   <div class="stack">
@@ -524,7 +554,7 @@ footer .wrap{display:grid;gap:10px}
 
 <script>
 (function(){
-  var views=["home","criteria","program","newcomers","thomson","plan","about","contact"];
+  var views=["home","criteria","program","newcomers","thomson","plan","team","about","contact"];
   function show(v){
     if(views.indexOf(v)<0) v="home";
     document.querySelectorAll("[data-view]").forEach(function(s){s.hidden=s.dataset.view!==v});
@@ -594,6 +624,38 @@ footer .wrap{display:grid;gap:10px}
     var t=document.getElementById("p-msg"), ok=document.getElementById("p-copied");
     function fallback(){t.focus();t.select();ok.hidden=false}
     if(navigator.clipboard){navigator.clipboard.writeText(t.value).then(function(){ok.hidden=false},fallback)}else fallback();
+  });
+
+  var TEAM={"s":"ALy3od7et2Zd3sX3dLxp0g==","i":"30b0RUzGZLmD9LzY","d":"rfZw1dNTlvr+1nL8R6gOmK0TqRMfo+u+tF/k8HKGAQf32hvomAd3XqZLCcBk3zm2gPeNvzqFzhtDcUGuKa5WSmZizMAG8ZugNJD2uQrSRpHOGnvFq6Jckf8dN9B+VWhmDXn4TyWMWSkkm+28HecNIffvSonJVIOINYJJDRg1qUzM5bG43dpjeg1aKfy0FOgQatnspS+33UcVfdEJluGM36uLgFWRoC+iWvuLUPegkmOCfgXkWgLg4lZK0wQjYVKCXrX7xl5bEUqBTkiP6PVeCNs4aIykxYItQDXiumhvtI7UQBqdGD0BHDPPDCR7Okol4T8EtDzne87E51O/bg8EHJAyz6VuHgXvSoL3DGDtVavQMayoWlADlxMrGgZkG/RnfV8r0j9MXOcddT1ao523IEPg5Rg1E9VCWvGN94ix+94RODBFAsOD4fOp/76/HusW9Sj0NUYFT0BNqFtDIDzeQgK+/lKz1vIfckOruIgo8ZERpFpqX39FAIQkZdpeDCuBLoJB6NbbpXbvSmgpTfPFrg8389moM0iWQZblY9Vd8jHrSomhbL7Q8TEzCOaAUmKzIEfecCE3753S5zJ8bYvchyYYjWNOuRG01vwg/f6rUxqq2hJSbdMbZl+DS96mPzx7tBMY36TvHkNEs1glHq8y27D2dHeQ7hcpEdW9J/KRD3b5tLWek3R6InIGaO1JTPJZ4/S1jwJVqz4QDfn3aPLySk9jdEUznfKanB1LEQu3xQeoJ0ZquVnUWP7otU63nuNXHoX4lFn/jlCVC7MVHaeIW9Yy/QdpNZJ0GW/FbeyEUVCngu3FeLUn/2dFlER0ECzZvHfwuut8da2hrE6MhoBxreaBGQcXJxliSHJUZsJv40HWb3RP"};
+  function b64(x){return Uint8Array.from(atob(x),function(c){return c.charCodeAt(0)})}
+  function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+  function showTeam(items){
+    var box=document.getElementById("t-links");
+    box.innerHTML=items.map(function(it){
+      return '<a class="card" href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">'+
+        '<h3><span class="zh">'+esc(it.zh)+'</span><span class="en">'+esc(it.en)+'</span></h3>'+
+        '<p><span class="zh">'+esc(it.zhn)+'</span><span class="en">'+esc(it.enn)+'</span></p>'+
+        '<span class="url">'+esc(it.url)+'</span></a>';
+    }).join("");
+    box.hidden=false;document.getElementById("t-lock").hidden=true;
+  }
+  document.getElementById("t-form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var zh=document.body.dataset.l==="zh",err=document.getElementById("t-err"),btn=document.getElementById("t-btn");
+    var pass=document.getElementById("t-pass").value.trim();
+    if(!pass){err.hidden=false;err.textContent=zh?"请输入密码。":"Enter the passcode.";return}
+    if(!(window.crypto&&crypto.subtle)){err.hidden=false;err.textContent=zh?"请使用 https:// 网址打开本页。":"Open this page over https:// to unlock.";return}
+    btn.disabled=true;err.hidden=false;err.textContent=zh?"正在验证…":"Checking…";
+    var te=new TextEncoder();
+    crypto.subtle.importKey("raw",te.encode(pass),"PBKDF2",false,["deriveKey"]).then(function(k){
+      return crypto.subtle.deriveKey({name:"PBKDF2",salt:b64(TEAM.s),iterations:600000,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["decrypt"]);
+    }).then(function(key){
+      return crypto.subtle.decrypt({name:"AES-GCM",iv:b64(TEAM.i)},key,b64(TEAM.d));
+    }).then(function(buf){
+      err.hidden=true;showTeam(JSON.parse(new TextDecoder().decode(buf)));
+    }).catch(function(){
+      err.textContent=zh?"密码不正确，请再试一次。":"That passcode isn't right. Try again.";
+    }).then(function(){btn.disabled=false});
   });
 
   document.getElementById("f").addEventListener("submit",function(e){
